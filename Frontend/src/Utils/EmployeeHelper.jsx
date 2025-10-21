@@ -61,9 +61,6 @@ export const fetchDepartments = async () => {
             <button className="px-3 py-1 bg-blue-400 text-white" >
                 Edit
             </button>
-            <button className="px-3 py-1 bg-red-600 text-white" >
-                Delete
-            </button>
             <button className="px-3 py-1 bg-yellow-600 text-white" >
                 Salary
             </button>
