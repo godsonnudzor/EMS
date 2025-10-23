@@ -46,10 +46,10 @@ const addEmployee = async (req, res) => {
         role,
     });
     await newEmployee.save();
-    res.status(201).json({ message: "Employee added successfully" });
+    res.status(200).json({ success: true, message: "Employee added successfully" });
 } catch (error) {
         console.error("Error adding employee:", error);
-        res.status(500).json({ message: "Server error" });
+        res.status(500).json({ success: false, message: "Server error" });
     }
  }; 
 
