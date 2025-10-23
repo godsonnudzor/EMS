@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const Add = () => {
     const [departments, setDepartments] = React.useState([]);
     const [formData, setFormData] = useState({});
-    const navigate = useNavigate();
+   
 
     useEffect(() => {
             const getDepartments = async () => {
@@ -26,6 +26,7 @@ const Add = () => {
             setFormData((prevData) => ({ ...prevData, [name]: value }));
         }
     };
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formDataObj = new FormData();
@@ -41,11 +42,10 @@ const Add = () => {
                 }
             });
             if (response.data.success) {
-                navigate('/admin-dashboard/employees')
-                alert('Employee added successfully')
-                window.location.reload();
+              navigate('/admin-dashboard/employees');
             }
         } catch(error) {
+          console.log(error);
             if (error.response && !error.response.data.success) {
                 alert(error.response.data.error)
             }
@@ -105,7 +105,6 @@ const Add = () => {
                placeholder=' DOB'
                onChange={handleChange}
                className=' mt-1 block border border-gray-300 p-2 w-full rounded-md'
-               required 
               />
           </div>
           {/** Address Field  */}
@@ -117,7 +116,6 @@ const Add = () => {
                placeholder='Address'
                onChange={handleChange}
                className='mt-1 block border border-gray-300 p-2 w-full rounded-md'
-               required
               />
             </div>
             {/** Joining Date Field */}
@@ -129,8 +127,7 @@ const Add = () => {
                name='joiningDate'
                 placeholder=' Joining Date'
                 onChange={handleChange}
-               className='mt-1 block border border-gray-300 p-2 w-full rounded-md'
-               required 
+               className='mt-1 block border border-gray-300 p-2 w-full rounded-md' 
               />
             </div>
             {/** gender  Field */}
@@ -141,7 +138,7 @@ const Add = () => {
                 <select name="gender" 
                 onChange={handleChange}
                 className='mt-1 block border border-gray-300 p-2 w-full rounded-md' 
-                required> 
+                > 
                   <option value="">Select Gender</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
@@ -155,7 +152,7 @@ const Add = () => {
                 <select name="maritalStatus"
                 onChange={handleChange}
                  className='mt-1 block border border-gray-300 p-2 w-full rounded-md' 
-                required> 
+                > 
                   <option value="">Select Marital Status</option>
                   <option value="single">Single</option>
                   <option value="married">Married</option>
@@ -170,7 +167,6 @@ const Add = () => {
                name='designation'
                placeholder=' Designation'
                className=' mt-1 block border border-gray-300 p-2 w-full rounded-md'
-               required 
                onChange={handleChange}
               />
             </div>
@@ -241,7 +237,6 @@ const Add = () => {
                placeholder='Upload Image'
                className='mt-1 block border border-gray-300 p-2 w-full rounded-md'
                onChange={handleChange}
-               required 
               />
             </div>
         </div>

@@ -16,8 +16,8 @@ const upload = multer({ storage: storage });
 
 const addEmployee = async (req, res) => {
     try {
-    const { name, email, employeeId, dob, address, joiningDate, 
-        gender, maritalStatus, designation, password, department } = req.body;
+    const { name, email, employeeId, dob, address, joiningDate, gender, maritalStatus, 
+        designation, password, department,salary, role } = req.body;
     const user = await User.findOne({email})
     if (user) {
         return res.status(400).json({ message: "User with this email already exists" });
@@ -41,7 +41,9 @@ const addEmployee = async (req, res) => {
         gender,
         maritalStatus,
         designation,
-        department
+        department,
+        salary,
+        role,
     });
     await newEmployee.save();
     res.status(201).json({ message: "Employee added successfully" });
