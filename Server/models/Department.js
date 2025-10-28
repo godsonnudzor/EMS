@@ -7,6 +7,7 @@ const departmentSchema = new mongoose.Schema({
     updatedAt : {type : Date, default : Date.now}
 })
 
-const Department = mongoose.model("Departments",departmentSchema)
+// Use singular model name that matches refs in other schemas
+const Department = mongoose.model("Department", departmentSchema)
 
 export default Department;

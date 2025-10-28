@@ -1,35 +1,49 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+
+// Use Vite environment variable for API base (falls back to localhost:3000)
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 export const columns = [
     {
         name : "SNO",
-        selector : (row) => row.sno
+        selector : (row) => row.sno,
+        width: '90px',
+        sortable:true
+
     },
+    {
+      name: 'Profile Image',
+      // selector kept for filtering/sorting libraries; cell provides rendered image
+      selector: (row) => row.profileImage
+      },
      {
         name : "Name",
         selector : (row) => row.name,
-        sortable : true
+        width: '180px',
+        sortable:true
     },
-    {
-        name : "Image",
-        selector : (row) => row.profileImage,
-        cell: (row) => <img src={row.profileImage} className="w-12 h-12 rounded-full" />,
-    },
+    
     {
         name : "Department",
         selector : (row) => row.dep_name,
-        sortable : true
+        width: '180px',
+        sortable:true
     },
     {
         name : "DOB",
         selector : (row) => row.dob,
-        sortable : true
+        width: '120px'
     },
-     {
-        name : "Action",
-        selector : (row) => row.Action
-    }
-]
+  {
+    name: 'Action',
+    // pass a consistent prop name 'id' to EmployeeButtons so it can navigate correctly
+    cell: row => <EmployeeButtons id={row._id} />,
+    center:true,
+    width:"400px"
+  },
+];
+
 export const fetchDepartments = async () => {
     let departments = [];
   try {
@@ -39,7 +53,7 @@ export const fetchDepartments = async () => {
         }
       })
       if (response.data.success) {
-        departments = await response.data.departments;
+        departments = response.data.departments;
    
       }
       } catch (error) {
@@ -50,24 +64,20 @@ export const fetchDepartments = async () => {
       return departments;
     }; 
 
-    export const EmployeeButtons = ({ _id }) => {
+  export const EmployeeButtons = ({ id }) => {
     const navigate = useNavigate();
-    return (
-        <div className='flex space-x-3'>
-            <button className="px-3 py-1 bg-teal-600 text-white"
-                >
-                View
-            </button>
-            <button className="px-3 py-1 bg-blue-400 text-white" >
-                Edit
-            </button>
-            <button className="px-3 py-1 bg-yellow-600 text-white" >
-                Salary
-            </button>
-            <button className="px-3 py-1 bg-red-600 text-white" >
-                Leave
-            </button>
 
-        </div>
-    )
-}
+    return (
+      <div className="flex space-x-3">
+        <button
+          className="px-3 py-1 bg-teal-600 text-white"
+          onClick={() => navigate(`/admin-dashboard/employees/${id}`)}
+        >
+          View
+        </button>
+        <button className="px-3 py-1 bg-blue-400 text-white">Edit</button>
+        <button className="px-3 py-1 bg-yellow-400 text-white">Salary</button>
+        <button className="px-3 py-1 bg-red-400 text-white">Leave</button>
+      </div>
+    );
+  };

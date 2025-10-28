@@ -1,38 +1,35 @@
-import React from 'react'
-import { useEffect } from 'react';
+import React, { useEffect } from 'react'
 import { useState } from 'react';
-import { Link } from 'react-router-dom'
+import {Link } from 'react-router-dom'
 import axios from 'axios'
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 import DataTable from 'react-data-table-component'
-import {EmployeeButtons, columns} from '../../Utils/EmployeeHelper'
+import {columns, EmployeeButtons} from '../../Utils/EmployeeHelper'
 
 const List = () => {
   const [employees, setEmployees] = useState([]);
-  const [empLoading, setEmpLoading] = useState(false);
-   useEffect(() => {
+   const [empLoading, setEmpLoading] = useState(false);
+
+    useEffect(() => {
     const fetchEmployees = async () => {
       setEmpLoading(true)
       try {
-        const response = await axios.get('http://localhost:5000/api/employee', {
-          headers : {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-        })
-        if (response.data.success) {
-          console.log(response.data.employees)
-        let sno = 1;
-        const data = await response.data.employees.map((emp) => (
-          {
-            _id : emp._id,
-            sno: sno++,
-            dep_name: emp.department.dep_name,
-            name: emp.userId.name, 
-            dob : new Date(emp.dob).toLocaleDateString(),
-            profileImage : emp.userId.profileImage,
-
-            Action: emp.Action = (<EmployeeButtons id={emp._id}  />),
-          }
-        ));
+        const response = await axios.get(`${API_URL}/api/employee`, {
+        headers : {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      console.log(response.data)
+      if (response.data.success) {
+        const data = response.data.employees.map((emp, index) => ({
+          _id: emp._id,
+          sno: index + 1,
+          dep_name: emp.department?.dep_name || '-',
+          name: emp.userId?.name || '-',
+          dob: emp.dob ? new Date(emp.dob).toLocaleDateString() : '-',
+          // pass the stored path/URL string; EmployeeHelper will construct the final src
+          profileImage:<img src={`http://localhost:3000/${emp.userId?.profileImage || emp.userId?.profileImageURL || emp.userId?.profileImagePath || ''}`} />,
+        }));
         setEmployees(data);
       }
       } catch (error) {
@@ -40,9 +37,9 @@ const List = () => {
                 alert(error.response.data.error)
             }
       } finally {
-        setEmpLoading(false)
+        setEmpLoading(false);
       }
-    }; 
+    }
     fetchEmployees();
   }, []);
 
@@ -52,7 +49,7 @@ const List = () => {
         <h3 className='text-2xl font-bold'>Manage Employees</h3>
       </div>
       <div className='flex justify-between items-center'>
-        <input type="text" placeholder='Search by Employee Name' 
+        <input type="text" placeholder='Search by Emp Name' 
         className='px-4 py-0.5 border'
          />
         <Link to='/admin-dashboard/add-employee' 
@@ -61,12 +58,10 @@ const List = () => {
       </div>
       <div className='mt-4'>
         <DataTable 
-          columns={columns}
-          data={employees}
           progressPending={empLoading}
           pagination
-          highlightOnHover
-          pointerOnHover
+          columns={columns}
+          data={employees}
         />
       </div>
     </div>

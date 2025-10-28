@@ -8,6 +8,7 @@ const DepartmentList = () => {
   const [departments, setDepartments] = useState([])
   const [depLoading, setDepLoading] = useState(false)
   const [filteredDepartments, setFilteredDepartments] = useState([]);
+ 
   const onDepartmentDelete = async(id) => {
   const data = departments.filter((dep) => dep._id !== id);
     setDepartments(data);
