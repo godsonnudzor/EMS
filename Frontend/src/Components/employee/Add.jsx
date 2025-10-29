@@ -35,7 +35,7 @@ const Add = () => {
     // Handle form submission logic here
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/employee/add",
+        "http://localhost:3000/api/employee/add",
         formDataObj,
         {
           headers: {

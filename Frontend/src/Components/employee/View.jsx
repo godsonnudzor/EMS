@@ -8,7 +8,7 @@ const View = () => {
   const [employee, setEmployee] = useState([])
      useEffect(() => {
     const fetchEmployee = async () => {
-      try {const response = await axios.get(`http://localhost:5000/api/employee/${id}`, {
+      try {const response = await axios.get(`http://localhost:3000/api/employee/${id}`, {
         headers : {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -28,7 +28,7 @@ const View = () => {
   return (
     <div>
       <div>
-        <img src={`http//:localhost:5000/${employee.userId.profileImage}`} />
+        <img src={`http//:localhost:3000/${employee.userId.profileImage}`} />
       </div>
     </div>
   )

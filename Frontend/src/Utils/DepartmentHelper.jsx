@@ -22,7 +22,7 @@ export const DepartmentButtons = ({ _id, onDepartmentDelete }) => {
         if (confirmDelete) {
         // Implement delete functionality here
             try {
-                const response = await axios.delete(`http://localhost:5000/api/department/${id}`, {
+                const response = await axios.delete(`http://localhost:3000/api/department/${id}`, {
                     headers : {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                     }
