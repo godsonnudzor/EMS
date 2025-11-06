@@ -39,7 +39,6 @@ export const columns = [
     name: 'Action',
     // pass a consistent prop name 'id' to EmployeeButtons so it can navigate correctly
     cell: row => <EmployeeButtons id={row._id} />,
-    center:true,
     width:"400px"
   },
 ];
@@ -47,7 +46,7 @@ export const columns = [
 export const fetchDepartments = async () => {
     let departments = [];
   try {
-      const response = await axios.get('http://localhost:5000/api/department', {
+      const response = await axios.get('http://localhost:3000/api/department', {
         headers : {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -75,7 +74,12 @@ export const fetchDepartments = async () => {
         >
           View
         </button>
-        <button className="px-3 py-1 bg-blue-400 text-white">Edit</button>
+        <button 
+            className="px-3 py-1 bg-blue-400 text-white"
+           onClick={() => navigate(`/admin-dashboard/employees/edit/${id}`)}
+        >
+          Edit
+        </button>
         <button className="px-3 py-1 bg-yellow-400 text-white">Salary</button>
         <button className="px-3 py-1 bg-red-400 text-white">Leave</button>
       </div>
