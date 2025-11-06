@@ -9,6 +9,7 @@ import {columns, EmployeeButtons} from '../../Utils/EmployeeHelper'
 const List = () => {
   const [employees, setEmployees] = useState([]);
    const [empLoading, setEmpLoading] = useState(false);
+   const [filteredEmployees, setFilterEmployees] = useState([])
 
     useEffect(() => {
     const fetchEmployees = async () => {
@@ -31,6 +32,7 @@ const List = () => {
           profileImage:<img src={`http://localhost:3000/${emp.userId?.profileImage || emp.userId?.profileImageURL || emp.userId?.profileImagePath || ''}`} />,
         }));
         setEmployees(data);
+        setFilterEmployees(data);
       }
       } catch (error) {
          if (error.response && !error.response.data.success) {
@@ -43,14 +45,24 @@ const List = () => {
     fetchEmployees();
   }, []);
 
+  const handleFilter = (e) => {
+    const records = employees.filter((emp) => (
+      emp.name.toLowerCase().includes(e.target.value.toLowerCase())
+    ))
+    setFilterEmployees(records)
+
+  }
+
   return (
     <div className='p-6'> 
       <div className='text-center '>
         <h3 className='text-2xl font-bold'>Manage Employees</h3>
       </div>
       <div className='flex justify-between items-center'>
-        <input type="text" placeholder='Search by Emp Name' 
+        <input type="text" 
+        placeholder='Search by Emp Name' 
         className='px-4 py-0.5 border'
+        onChange={handleFilter}
          />
         <Link to='/admin-dashboard/add-employee' 
         className='px-4 py-1 bg-teal-600 rounded text-white'
@@ -61,7 +73,7 @@ const List = () => {
           progressPending={empLoading}
           pagination
           columns={columns}
-          data={employees}
+          data={filteredEmployees}
         />
       </div>
     </div>
