@@ -20,7 +20,6 @@ const List = () => {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       })
-      console.log(response.data)
       if (response.data.success) {
         const data = response.data.employees.map((emp, index) => ({
           _id: emp._id,

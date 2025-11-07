@@ -30,7 +30,6 @@ const Edit = () => {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       })
-      console.log(response.data)
       if (response.data.success) {
         const employee = response.data.employee
         setEmployee((prev) => ({...prev, name: employee.userId.name,
