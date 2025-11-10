@@ -13,7 +13,7 @@ import List from './Components/employee/List'
 import Add from './Components/employee/Add'
 import View from './Components/employee/View'
 import Edit from './Components/employee/Edit'
-
+import AddSalary from './Components/salary/Add'
 
 function App() {
   return (
@@ -35,7 +35,8 @@ function App() {
           <Route path='/admin-dashboard/employees' element={<List/>}/>
           <Route path='/admin-dashboard/add-employee' element={<Add/>}/>
           <Route path='/admin-dashboard/employees/:id' element={<View/>}/>
-           <Route path='/admin-dashboard/employees/edit/:id' element={<Edit/>}/>
+          <Route path='/admin-dashboard/employees/edit/:id' element={<Edit/>}/>
+          <Route path='/admin-dashboard/salary/add/' element={<AddSalary/>}/>
           </Route>
         <Route path="/employee-dashboard" element={
           <PrivateRoutes>
