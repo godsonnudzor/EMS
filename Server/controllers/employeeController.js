@@ -86,10 +86,16 @@ const getEmployees = async (req, res) => {
 
 const getEmployee = async (req, res) => {
   try {
+    let employee;
    const { id } = req.params;
-    const employee = await Employee.findById({_id:id})
+     employee = await Employee.findById({_id:id})
       .populate("userId", { password: 0 })
       .populate("department");
+      if (!employee) {
+     employee =  await Employee.findOne({userId:id})
+      .populate("userId", { password: 0 })
+      .populate("department");    
+      }
     return res.status(200).json({ success: true, employee });
   } catch (error) {
     return res
@@ -149,7 +155,7 @@ const fetchEmployeeByDepId = async(req, res) => {
    const { id } = req.params;
     const employees = await Employee.find({department:id})
     return res.status(200).json({ success: true, employees });
-  } catch (error) {
+  } catch (error) { 
     return res
       .status(500)
       .json({ success: false, error: "Get employeesByDepId server Error" });

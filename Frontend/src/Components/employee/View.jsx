@@ -12,6 +12,7 @@ const View = () => {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       })
+      console.log(response.data)
       if (response.data.success) {
         setEmployee(response.data.employee);
       }

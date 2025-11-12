@@ -13,34 +13,35 @@ export const columns = [
 
     },
     {
-      name: 'Profile Image',
+      name: 'Image',
       // selector kept for filtering/sorting libraries; cell provides rendered image
       selector: (row) => row.profileImage
       },
      {
         name : "Name",
         selector : (row) => row.name,
-        width: '180px',
+        width: '165px',
         sortable:true
     },
     
     {
         name : "Department",
         selector : (row) => row.dep_name,
-        width: '180px',
+        width: '150px',
         sortable:true
     },
     {
         name : "DOB",
         selector : (row) => row.dob,
-        width: '120px'
+        width: '95px'
     },
   {
     name: 'Action',
     // pass a consistent prop name 'id' to EmployeeButtons so it can navigate correctly
     cell: row => <EmployeeButtons id={row._id} />,
-    width:"400px"
-  },
+    width:"350px",
+    center : true
+  }
 ];
 
 export const fetchDepartments = async () => {

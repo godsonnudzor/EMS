@@ -1,5 +1,5 @@
 import React from 'react'
-import SummaryCards from './SummaryCards'
+import SummaryCards from './SummaryCard'
 import { FaBuilding, FaCheckCircle, FaFileAlt, FaHourglassHalf, FaMoneyBillWave, FaTimesCircle, FaUser } from 'react-icons/fa'
 
 const AdminSummary = () => {
