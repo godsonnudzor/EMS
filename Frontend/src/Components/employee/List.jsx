@@ -29,7 +29,7 @@ const List = () => {
           dob: emp.dob ? new Date(emp.dob).toLocaleDateString() : '-',
           // pass the stored path/URL string; EmployeeHelper will construct the final src
           profileImage: <img width={40} className='rounded-full' src={`http://localhost:3000/${emp.userId.profileImage}`}/>,
-          action : (<EmployeeButtons id={emp._id}/>),
+          action : (<EmployeeButtons id={emp._id}/>)
         }));
         setEmployees(data);
         setFilterEmployees(data);

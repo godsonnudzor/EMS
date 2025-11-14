@@ -40,7 +40,7 @@ export const columns = [
     // pass a consistent prop name 'id' to EmployeeButtons so it can navigate correctly
     cell: row => <EmployeeButtons id={row._id} />,
     width:"350px",
-    center : true
+   
   }
 ];
 
