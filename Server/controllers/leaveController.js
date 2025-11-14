@@ -9,12 +9,10 @@ const addLeave = async(req, res) => {
             employeeId : employee._id,leaveType,startDate,endDate,reason
         })
         await newLeave.save()
-        console.log(newLeave)
         
         return res.status(200).json({success :true })
 
     } catch(error) {
-        console.log(error.message)
         return res.status(500).json({success:false, error:'Leave server Error'})
     }
 }
