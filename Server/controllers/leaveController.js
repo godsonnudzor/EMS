@@ -8,13 +8,23 @@ const addLeave = async(req, res) => {
         const newLeave = new Leave ({
             employeeId : employee._id,leaveType,startDate,endDate,reason
         })
-        await newLeave.save()
-        
+        await newLeave.save() 
+        console.log(newLeave)
         return res.status(200).json({success :true })
-
     } catch(error) {
+        console.log(error.message)
         return res.status(500).json({success:false, error:'Leave server Error'})
     }
 }
+const getLeaves = async(req, res) => {
+    try {
+        const {id} = req.params;
+        const employee = await Employee.findOne({userId: id})
+        const leaves = await Leave.find({employeeId: employee._id})
+        return res.status(200).json({success:true, leaves})
+    } catch (error) {
+        return res.status(500).json({success:false, error:'Get Leave Server Error'})
+    }   
+}
 
-export {addLeave}
+export {addLeave, getLeaves }

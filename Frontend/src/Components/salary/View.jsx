@@ -48,8 +48,7 @@ const View = () => {
             onChange={filterSalaries}
              />
         </div>
-    {
-        filteredSalaries.length > 0 ?(
+    { filteredSalaries.length > 0 ?(
            <table className='w-full text-sm text-left text-gray-300'>
             <thead className='text-xs text-gray-700 uppercase bg-gray-50 border border-gray-200'>
                 <tr>
