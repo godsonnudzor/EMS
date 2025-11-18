@@ -105,8 +105,6 @@ const Add = () => {
         </button>
       </form>
     </div>
-
   )
 }
-
 export default Add

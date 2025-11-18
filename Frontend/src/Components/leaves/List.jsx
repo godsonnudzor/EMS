@@ -37,7 +37,6 @@ const list = () => {
                 placeholder='Search by Dep Name'
                 className='px-4 py-0.5 border'    
                 />
-
             </div>
             <Link
             to='/employee-dashboard/add-leave'

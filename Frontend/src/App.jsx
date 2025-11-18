@@ -59,6 +59,7 @@ function App() {
           
           <Route path='/employee-dashboard/leaves' element={<LeaveList/>}/>
            <Route path='/employee-dashboard/add-leave' element={<AddLeave/>}/>
+           <Route path='/employee-dashboard/salary/:id' element={<ViewSalary/>}/>
           
 
 
