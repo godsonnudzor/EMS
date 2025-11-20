@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useState,useEffect } from 'react'
-import { useAuth } from '../../Context/authContext.jsx';  
+import { useState, useEffect } from 'react'
+import { useAuth } from '../../Context/authContext.jsx'
 import axios from 'axios';      
 
 const list = () => {

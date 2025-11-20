@@ -15,7 +15,7 @@ export const columns = [
     {
       name: 'Image',
       // selector kept for filtering/sorting libraries; cell provides rendered image
-      selector: (row) => row.profileImage
+      selector: (row) => row.Image,
       },
      {
         name : "Name",

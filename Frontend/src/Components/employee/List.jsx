@@ -21,19 +21,33 @@ const List = () => {
         }
       })
       if (response.data.success) {
-        const data = response.data.employees.map((emp, index) => ({
-          _id: emp._id,
-          sno: index + 1,
-          dep_name: emp.department?.dep_name || '-',
-          name: emp.userId?.name || '-',
-          dob: emp.dob ? new Date(emp.dob).toLocaleDateString() : '-',
-          // pass the stored path/URL string; EmployeeHelper will construct the final src
-          profileImage: <img width={40} className='rounded-full' src={`http://localhost:3000/${emp.userId.profileImage}`}/>,
-          action : (<EmployeeButtons id={emp._id}/>)
-        }));
+       // Inside your fetchEmployees function...
+const data = response.data.employees.map((emp, index) => ({
+  _id: emp._id,
+  sno: index + 1,
+  dep_name: emp.department?.dep_name || '-',
+  name: emp.userId?.name || '-',
+  dob: emp.dob ? new Date(emp.dob).toLocaleDateString() : '-',
+
+  // 👇 THIS IS THE UPDATED SECTION
+  // Inside List.jsx mapping function
+Image: (
+  <img 
+    src={`${API_URL}${emp.userId?.profileImage}`} 
+    alt={emp.userId?.name || "Employee"}
+    className="rounded-full" 
+    width="70px" 
+    // Keep the fallback logic, just in case
+  />
+),
+  // 👆 END OF UPDATED SECTION
+
+  action: (<EmployeeButtons id={emp._id} />)
+}));
         setEmployees(data);
         setFilterEmployees(data);
       }
+      console.log(response.data);
       } catch (error) {
          if (error.response && !error.response.data.success) {
                 alert(error.response.data.error)
