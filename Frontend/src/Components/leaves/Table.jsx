@@ -20,9 +20,9 @@ const Table = () => {
           _id: leave._id,
           sno: index + 1,
           employeeId: leave.employeeId.employeeId,
-          name: leave.employeeId.userId?.name || '-',
+          name: leave.employeeId.userId?.name ,
           leaveType: leave.leaveType,
-          department: leave.employeeId.department?.dep_name || '-',
+          department: leave.employeeId.department.dep_name,
           days: Math.ceil((new Date(leave.endDate) - new Date(leave.startDate)) / (1000 * 60 * 60 * 24)) + 1,
           startDate: new Date(leave.startDate).toLocaleDateString(),
           endDate: new Date(leave.endDate).toLocaleDateString(),
@@ -58,13 +58,15 @@ const Table = () => {
             <button className='px-2 py-1 bg-teal-600 text-white hover:bg-teal-700'>Rejected</button>
             </div>     
         </div>
-        <DataTable
+        <div className='mt-3'>
+          <DataTable
             columns={columns}
             data={leaves}
             pagination
             highlightOnHover
             pointerOnHover
-        />
+          />
+        </div>
     </div>
     ): <div>Loading...</div>}
     </>

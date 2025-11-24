@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const View = () => {
   const {id} = useParams();
-  const [employee, setEmployee] = useState(null)
+  const  [ employee, setEmployee ] = useState(null)
      useEffect(() => {
     const fetchEmployee = async () => {
       try {const response = await axios.get(`http://localhost:3000/api/employee/${id}`, {
@@ -32,7 +32,7 @@ const View = () => {
         Employee Details</h2>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <div>
-        <img src={`http//:localhost:3000/${employee.userId.profileImage}`} 
+        <img src={`http://localhost:3000${employee.userId.profileImage}`} 
         className='rounded-full border w-72 ' />
       </div>
       <div className='flex space-x-3 mb-5'>

@@ -1,6 +1,6 @@
 import Leave from '../models/Leave.js'
 import Employee from '../models/Employee.js'
-import path from 'path';
+
 
 const addLeave = async(req, res) => {
  try {
@@ -29,11 +29,12 @@ const getLeaves = async(req, res) => {
     try {
         const leaves = await Leave.find().populate({ 
             path: 'employeeId',
-            strictPopulate:[
+            populate:[
                 { 
-                    path: ' department',
+                    path: 'department',
                     select: 'dep_name'
                  },
+                 
                  {
                     path: 'userId',
                     select: 'name '
@@ -46,5 +47,29 @@ const getLeaves = async(req, res) => {
         return res.status(500).json({success:false, error:'Get Leaves Server Error'})
     }
 }
+const getLeaveDetail = async(req, res) => {
+    const {id} = req.params;
+     try {
+        const leave = await Leave.findById({_id: id}).populate({ 
+            path: 'employeeId',
+            populate:[
+                { 
+                    path: 'department', 
+                    select: 'dep_name'
+                 },
+                 
+                 {
+                    path: 'userId',
+                    select: 'name, profileImage '
+                 }
+            ] 
+         })
+        return res.status(200).json({success:true, leave})
+    } catch (error) {
+        console.log(error.message)
+        return res.status(500).json({success:false, error:'Get Leaves Server Error'})
+    }
+    
+}
 
-export {addLeave, getLeave, getLeaves }
+export {addLeave, getLeave, getLeaves, getLeaveDetail }

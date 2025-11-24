@@ -1,5 +1,5 @@
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios' 
 export const columns = [
     {
         name : "SNO",
@@ -9,7 +9,7 @@ export const columns = [
      {
         name : "Emp ID",
         selector : (row) => row.employeeId,
-        width : '100px'
+        width : '150px'
     },
      {
         name : "Name",
