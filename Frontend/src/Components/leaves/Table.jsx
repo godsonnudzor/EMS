@@ -39,7 +39,18 @@ const Table = () => {
     }
     useEffect(() => { 
     fetchLeaves();
-  }, [])
+  }, []);
+    const filterByInput = (e) => {
+      const searchTerm = e.target.value.toLowerCase(); 
+      if (searchTerm === '') {
+        fetchLeaves(); 
+      } else {
+        const filteredLeaves = leaves.filter((leave) =>
+          leave.employeeId.toLowerCase().includes(searchTerm)  
+        );
+        setLeaves(filteredLeaves);
+      }
+    }
   return (
     <>
     {leaves ? (
@@ -49,7 +60,8 @@ const Table = () => {
             <div className='flex justify-between items-center'>
                 <input type="text" 
                 placeholder='Search by Employee ID'
-                className='px-4 py-0.5 border'    
+                className='px-4 py-0.5 border'
+                onChange={filterByInput}    
                 />
             </div>
             <div className='space-x-3'>
