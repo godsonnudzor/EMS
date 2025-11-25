@@ -6,6 +6,7 @@ import DataTable from 'react-data-table-component'
 
 const Table = () => {
     const [leaves, setLeaves] = useState(null);
+    const [filteredLeaves, setFilteredLeaves] = useState(null); 
     const fetchLeaves = async () => {
       // Fetch leave data logic here
        try {
@@ -30,6 +31,7 @@ const Table = () => {
           action : (<LeaveButtons id={leave._id}/>)
         }));
         setLeaves(data);
+        setFilteredLeaves(data);
       }
       } catch (error) {
          if (error.response && !error.response.data.success) {
@@ -41,19 +43,21 @@ const Table = () => {
     fetchLeaves();
   }, []);
     const filterByInput = (e) => {
-      const searchTerm = e.target.value.toLowerCase(); 
-      if (searchTerm === '') {
-        fetchLeaves(); 
-      } else {
-        const filteredLeaves = leaves.filter((leave) =>
-          leave.employeeId.toLowerCase().includes(searchTerm)  
-        );
-        setLeaves(filteredLeaves);
-      }
-    }
-  return (
+      const data = leaves.filter(leave => 
+        leave.employeeId.toString().toLowerCase().includes(e.target.value.toLowerCase())
+      );
+      setFilteredLeaves(data);
+    };
+    const filterByButton = (status) => {
+      
+      const data = leaves.filter(leave => 
+        leave.status === status
+      );  
+      setFilteredLeaves(data);
+    };
+  return ( 
     <>
-    {leaves ? (
+    {filteredLeaves ? (
     <div className='p-6'>
         <div className='text-center'>
             <h3 className='text-2xl font-bold'>Manage Leave</h3>
@@ -65,15 +69,26 @@ const Table = () => {
                 />
             </div>
             <div className='space-x-3'>
-            <button className='px-2 py-1 bg-teal-600 text-white hover:bg-teal-700'>Pending</button>
-            <button className='px-2 py-1 bg-teal-600 text-white hover:bg-teal-700'>Approved</button>
-            <button className='px-2 py-1 bg-teal-600 text-white hover:bg-teal-700'>Rejected</button>
+                <button 
+                className='px-2 py-1 bg-teal-600 text-white hover:bg-teal-700'
+                onClick={() => filterByButton('Pending')}>
+                  Pending
+                </button>
+                <button 
+                    className='px-2 py-1 bg-teal-600 text-white hover:bg-teal-700'
+                    onClick={() => filterByButton('Approved')}>
+                      Approved
+                </button>
+                <button className='px-2 py-1 bg-teal-600 text-white hover:bg-teal-700'
+                  onClick={() => filterByButton('Rejected')}>
+                    Rejected
+                </button>
             </div>     
         </div>
         <div className='mt-3'>
           <DataTable
             columns={columns}
-            data={leaves}
+            data={filteredLeaves}
             pagination
             highlightOnHover
             pointerOnHover
