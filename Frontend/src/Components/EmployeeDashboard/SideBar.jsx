@@ -26,7 +26,7 @@ const Sidebar = () => {
             <FaUserFriends />
             <span>My Profile</span>
         </NavLink>
-        <NavLink to="/employee-dashboard/leaves"
+        <NavLink to={`/employee-dashboard/leaves/${user._id}`}
             className={({isActive}) => `${isActive ? " bg-teal-600 " : " " }
              flex items-center space-x-4 block py-2.5 px-4 rounded`}>
             <FaBuilding />

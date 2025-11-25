@@ -48,7 +48,7 @@ function App() {
           <Route path='/admin-dashboard/salary/add/' element={<AddSalary/>}/>
           <Route path='/admin-dashboard/leaves' element={<Table/>}/>
           <Route path='/admin-dashboard/leave/:id' element={<Detail/>}/>
-          
+          <Route path='/admin-dashboard/employees/leaves/:id' element={<LeaveList/>}/>
           </Route>
         <Route path="/employee-dashboard" element={
           <PrivateRoutes>
@@ -61,7 +61,7 @@ function App() {
 
           <Route path='/employee-dashboard/profile/:id' element={<View/>}/>
           
-          <Route path='/employee-dashboard/leaves' element={<LeaveList/>}/>
+          <Route path='/employee-dashboard/leaves/:id' element={<LeaveList/>}/>
            <Route path='/employee-dashboard/add-leave' element={<AddLeave/>}/>
            <Route path='/employee-dashboard/salary/:id' element={<ViewSalary/>}/>
            <Route path='/employee-dashboard/setting' element={<Setting/>}/>
