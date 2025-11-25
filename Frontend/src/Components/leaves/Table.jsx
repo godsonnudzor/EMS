@@ -48,7 +48,7 @@ const Table = () => {
             <h3 className='text-2xl font-bold'>Manage Leave</h3>
             <div className='flex justify-between items-center'>
                 <input type="text" 
-                placeholder='Search by Dep Name'
+                placeholder='Search by Employee ID'
                 className='px-4 py-0.5 border'    
                 />
             </div>

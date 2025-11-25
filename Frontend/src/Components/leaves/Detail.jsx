@@ -1,8 +1,10 @@
 import React, { useState,useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const Detail = () => {
   const {id} = useParams();
+  const Navigate = useNavigate();
   const  [ leave, setLeave ] = useState(null)
      useEffect(() => {
     const fetchLeave = async () => {
@@ -23,7 +25,24 @@ const Detail = () => {
     };
     fetchLeave();
   }, [])
-
+    const changeStatus = async(id, status) => {
+    try {
+      const response = await axios.put(`http://localhost:3000/api/leave/${id}`, 
+      {status},
+      {
+        headers : { 
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      if (response.data.success) {
+        Navigate('/admin-dashboard/leaves');
+      }
+    } catch (error) {
+      if (error.response && !error.response.data.success) {
+        alert(error.response.data.error);
+      }
+    }
+    }
   return (
     <>{leave ? (
     <div className='max-w-3xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md'>
@@ -63,8 +82,21 @@ const Detail = () => {
         <p className='font-meduim'>{new Date(leave.endDate).toLocaleDateString()}</p>
       </div>
        <div className='flex space-x-3 mb-5'>
-        <p className='text-lg font-bold'>Status:</p>
-        <p className='font-meduim'>{leave.status}</p>
+        <p className='text-lg font-bold'>
+            {leave.status === 'Pending' ? 'Action:' : 'Status:'}
+        </p>    
+        {leave.status === 'Pending' ? (
+            <div className='flex space-x-3'>
+            <button className='bg-teal-300 text-white px-4 py-2 rounded'
+            onClick={() => changeStatus(leave._id,"Approved")}
+            
+            >Approve</button> 
+            <button className='bg-red-300 text-white px-4 py-2 rounded'
+             onClick={() => changeStatus(leave._id,"Rejected")} >Reject</button>   
+            </div>
+        )
+        :  <p className='font-medium'>{leave.status}</p> }
+       
       </div>
 
       </div>
