@@ -5,15 +5,14 @@ import { columns, DepartmentButtons } from '../../Utils/DepartmentHelper'
 import axios from 'axios'
 
 const DepartmentList = () => {
-  const [departments, setDepartments] = useState([])
+  const [, setDepartments] = useState([])
   const [depLoading, setDepLoading] = useState(false)
   const [filteredDepartments, setFilteredDepartments] = useState([]);
  
-  const onDepartmentDelete = async(id) => {
-  const data = departments.filter((dep) => dep._id !== id);
-    setFilteredDepartments(data);
+  const onDepartmentDelete = () => {
+    fetchDepartments();
+  
   }
-  useEffect(() => {
     const fetchDepartments = async () => {
       setDepLoading(true)
       try {const response = await axios.get('http://localhost:3000/api/department', {
@@ -42,15 +41,10 @@ const DepartmentList = () => {
         setDepLoading(false)
       }
     }; 
+  
+  useEffect(() => {
     fetchDepartments();
   }, []);
-  const filterDepartments = async (e) => {
-    const records = departments.filter((dep) =>
-      dep.dep_name.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-
-    setFilteredDepartments(records);
-  }
   return (
     <>{depLoading ? <div>Loading....</div> : 
     <div className='p-5'>
@@ -60,7 +54,7 @@ const DepartmentList = () => {
       <div className='flex justify-between items-center'>
         <input type="text" placeholder='Search by Dept Name' 
         className='px-4 py-0.5 border'
-        onChange={filterDepartments}
+        onChange={filteredDepartments}
          />
         <Link to='/admin-dashboard/add-departments' 
         className='px-4 py-1 bg-teal-600 rounded text-white'
