@@ -46,8 +46,7 @@ export const LeaveButtons = ({ id }) => {
     const navigate = useNavigate();
     const handleView =  async(id) => {
         navigate(`/admin-dashboard/leave/${id}`);
-    }
-   
+    };
     return (
         <div className='flex space-x-3'>
             

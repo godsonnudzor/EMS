@@ -23,7 +23,7 @@ const Setting = () => {
         e.preventDefault();
         
         if (setting.newPassword !== setting.confirmPassword) {
-            setError("Set Password do not match");
+            setError("Confirm Password do not match");
             return;
         } else {
             try {            

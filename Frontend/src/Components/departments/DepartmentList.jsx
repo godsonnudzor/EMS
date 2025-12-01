@@ -11,7 +11,7 @@ const DepartmentList = () => {
  
   const onDepartmentDelete = async(id) => {
   const data = departments.filter((dep) => dep._id !== id);
-    setDepartments(data);
+    setFilteredDepartments(data);
   }
   useEffect(() => {
     const fetchDepartments = async () => {

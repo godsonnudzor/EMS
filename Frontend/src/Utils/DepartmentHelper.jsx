@@ -14,7 +14,7 @@ export const columns = [
         name : "Action",
         selector : (row) => row.Action
     }
-]
+];
 export const DepartmentButtons = ({ _id, onDepartmentDelete }) => {
     const navigate = useNavigate();
     const handleDelete =  async(id) => {
