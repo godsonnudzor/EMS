@@ -3,6 +3,7 @@ import { useAuth } from '../../Context/authContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 const Add = () => {
     const {user} = useAuth()
@@ -17,7 +18,8 @@ const Add = () => {
     };
     const handleSubmit = async (e)=> {
         e.preventDefault();
-        try {const response = await axios.post(`http://localhost:3000/api/leave/add`,
+        try {
+          const response = await axios.post(`${API_URL}/api/leave/add`,
             leave, {
         headers : {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -92,7 +94,6 @@ const Add = () => {
             className='w-full border border-gray-300'
             required
             onChange={handleChange}
-
              >
              </textarea>
         </div>
