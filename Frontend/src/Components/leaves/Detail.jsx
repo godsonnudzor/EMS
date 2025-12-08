@@ -8,7 +8,8 @@ const Detail = () => {
   const  [ leave, setLeave ] = useState(null)
      useEffect(() => {
     const fetchLeave = async () => {
-      try {const response = await axios.get(`http://localhost:3000/api/leave/detail/${id}`, {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/leave/detail/${id}`, {
         headers : {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -24,10 +25,11 @@ const Detail = () => {
            }
     };
     fetchLeave();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
     const changeStatus = async(id, status) => {
     try {
-      const response = await axios.put(`http://localhost:3000/api/leave/${id}`, 
+      const response = await axios.put(`http://localhost:3000/api/leaves/${id}`, 
       {status},
       {
         headers : { 

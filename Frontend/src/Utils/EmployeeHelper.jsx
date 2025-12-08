@@ -1,9 +1,11 @@
+/* eslint-disable react-refresh/only-export-components */
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 // Use Vite environment variable for API base (falls back to localhost:3000)
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const columns = [
     {
         name : "SNO",
@@ -44,6 +46,7 @@ export const columns = [
   }
 ];
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const fetchDepartments = async () => {
     let departments = [];
   try {

@@ -15,7 +15,6 @@ const Table = () => {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       })
-      console.log(response.data)
       if (response.data.success) {
         const data = response.data.leaves.map((leave, index) => ({
           _id: leave._id,

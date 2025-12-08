@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+// eslint-disable-next-line react-refresh/only-export-components
 export const columns = [
     {
         name : "SNO",
@@ -45,7 +46,7 @@ export const columns = [
 export const LeaveButtons = ({ id }) => {
     const navigate = useNavigate();
     const handleView =  async(id) => {
-        navigate(`/admin-dashboard/leave/${id}`);
+        navigate(`/admin-dashboard/leaves/${id}`);
     };
     return (
         <div className='flex space-x-3'>

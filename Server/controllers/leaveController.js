@@ -1,5 +1,6 @@
 import Leave from '../models/Leave.js'
 import Employee from '../models/Employee.js'
+import e from 'express';
 
 
 const addLeave = async(req, res) => {
@@ -17,12 +18,15 @@ const addLeave = async(req, res) => {
 }
 const getLeave = async(req, res) => {
     try {
-        const {id} = req.params;
-        let leaves = await Leave.find({employeeId: id});
-        if (!leaves || leaves.length === 0) {       
-        const employee = await Employee.findOne({userId: id})
-         leaves = await Leave.find({employeeId: employee._id})     
+        const {id, role} = req.params;
+        let leaves; 
+        if (role === 'admin') {
+            leaves = await Leave.find({employeeId: id});
+        } else {      
+            const employee = await Employee.findOne({userId: id})
+            leaves = await Leave.find({employeeId: employee._id})     
         }
+        console.log(leaves);
         return res.status(200).json({success:true, leaves})
     } catch (error) {
         return res.status(500).json({success:false, error:'Get Leave Server Error'})
@@ -44,6 +48,7 @@ const getLeaves = async(req, res) => {
                  }
             ] 
          })
+         console.log(leaves)
         return res.status(200).json({success:true, leaves})
     } catch (error) {
         console.log(error.message)
@@ -63,14 +68,16 @@ const getLeaveDetail = async(req, res) => {
                  
                  {
                     path: 'userId',
-                    select: 'name, profileImage '
+                    select: 'name profileImage'
                  }
             ] 
          })
         return res.status(200).json({success:true, leave})
     } catch (error) {
         console.log(error.message)
-        return res.status(500).json({success:false, error:'Get Leaves Server Error'})
+        return res.status(500).json(
+            {success:false,
+                 error:'Get Leaves details Server Error'})
     }
     
 }
