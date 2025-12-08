@@ -21,6 +21,8 @@ import AddLeave from './Components/leaves/Add'
 import Setting from './Components/EmployeeDashboard/Setting'
 import Table from './Components/leaves/Table'
 import Detail from './Components/leaves/Detail'
+import Attendance from './Components/attendance/Attendance'
+import AttendanceReport from './Components/attendance/AttendanceReport'
 
 
 function App() {
@@ -45,11 +47,13 @@ function App() {
           <Route path='/admin-dashboard/employees/:id' element={<View/>}/>
           <Route path='/admin-dashboard/employees/edit/:id' element={<Edit/>}/>
           <Route path='/admin-dashboard/employees/salary/:id' element={<ViewSalary/>}/>
-          <Route path='/admin-dashboard/salary/add/' element={<AddSalary/>}/>
+          <Route path='/admin-dashboard/salary/add/:id' element={<AddSalary/>}/>
           <Route path='/admin-dashboard/leaves' element={<Table/>}/>
           <Route path='/admin-dashboard/leaves/:id' element={<Detail/>}/>
           <Route path='/admin-dashboard/employees/leaves/:id' element={<LeaveList/>}/>
           <Route path='/admin-dashboard/setting' element={<Setting/>}/>
+          <Route path='/admin-dashboard/attendance' element={<Attendance/>}/>
+          <Route path='/admin-dashboard/attendance-report' element={<AttendanceReport/>}/>
           </Route>
         <Route path="/employee-dashboard" element={
           <PrivateRoutes>

@@ -1,6 +1,8 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import {FaBuilding, FaCalendar, FaCogs, FaMoneyBillWave, FaRegAddressCard, FaTachometerAlt, FaUserFriends} from 'react-icons/fa'
+import User from '../../../../Server/Models/User'
+import {AiOutlineFileText} from 'react-icons/ai'
 
 const AdminSidebar = () => {
   return (
@@ -36,17 +38,23 @@ const AdminSidebar = () => {
             <FaCalendar />
             <span>Leave</span>
         </NavLink>
-        <NavLink to="/admin-dashboard/salary/add"
+        <NavLink to={`/admin-dashboard/salary/add/${User._id}`}
             className={({isActive}) => `${isActive ? " bg-teal-600 " : " " }
              flex items-center space-x-4 block py-2.5 px-4 rounded`}>
             <FaMoneyBillWave />
             <span>Salary</span>
         </NavLink>
-        <NavLink to="/admin-dashboard/attendance/mark"
+        <NavLink to={`/admin-dashboard/attendance`}
             className={({isActive}) => `${isActive ? " bg-teal-600 " : " " }
              flex items-center space-x-4 block py-2.5 px-4 rounded`}>
             <FaRegAddressCard />
             <span>Attendance</span>
+        </NavLink>
+        <NavLink to={`/admin-dashboard/attendance-report`}
+            className={({isActive}) => `${isActive ? " bg-teal-600 " : " " }
+             flex items-center space-x-4 block py-2.5 px-4 rounded`}>
+            <AiOutlineFileText  />
+            <span>Attendance Report</span>
         </NavLink>
         <NavLink to="/admin-dashboard/setting"
              className={({isActive}) => `${isActive ? " bg-teal-600 " : " " }
