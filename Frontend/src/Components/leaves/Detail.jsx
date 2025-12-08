@@ -29,7 +29,7 @@ const Detail = () => {
   }, [])
     const changeStatus = async(id, status) => {
     try {
-      const response = await axios.put(`http://localhost:3000/api/leaves/${id}`, 
+      const response = await axios.put(`http://localhost:3000/api/leave/${id}`, 
       {status},
       {
         headers : { 
