@@ -43,4 +43,6 @@ const verifyUser = async (req, res, next) => {
     }
 }
 
-export default verifyUser
+// Provide both a default export and a named export for compatibility
+export const authMiddleware = verifyUser;
+export default verifyUser;
