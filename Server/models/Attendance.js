@@ -4,7 +4,7 @@ const attendanceSchema = new mongoose.Schema({
     date : {type : String, // format 'YYYY-MM-DD' 
         required : true},
     status : {type : String, 
-        enum : ['Present', 'Absent', 'Leave', 'leave'],
+        enum : ['Present', 'Absent', 'Sick', 'Leave'],
          default: 'Null' }
     });
 

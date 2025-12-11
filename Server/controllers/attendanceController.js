@@ -17,5 +17,4 @@ const getAttendance = async (req, res) => {
     }
   
 }   
-
 export { getAttendance };

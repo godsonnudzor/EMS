@@ -48,7 +48,7 @@ const data = response.data.attendance.map((att, index) => ({
 
   const handleFilter = (e) => {
     const records = attendance.filter((emp) => (
-      emp.employeeId.userId.name.toLowerCase().includes(e.target.value.toLowerCase())
+      emp.employeeId.employeeId.name.toLowerCase().includes(e.target.value.toLowerCase())
     ))
     setFilteredAttendance(records)
   };
