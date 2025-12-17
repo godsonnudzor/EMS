@@ -11,7 +11,7 @@ const getAttendance = async (req, res) => {
                 'userId'
             ]
         });
-        return res.status(200).json({ success: true, data: attendance });
+        return res.status(200).json({ success: true, attendance });
     } catch (error) {
         return res.status(500).json({ success: false, error: 'Server Error' });
     }

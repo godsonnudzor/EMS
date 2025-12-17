@@ -17,15 +17,15 @@ const Attendance = () => {
         const response = await axios.get(`${API_URL}/api/attendance`, {
         headers : {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      })
+        },
+      });
       if (response.data.success) {
        // Inside your fetchAttendance function...
-const data = response.data.attendance.map((att, index) => ({
-  employeeId: att.employeeId,
+  const data = response.data.attendance.map((att, index) => ({
+  employeeId: att.employeeId.employeeId,
   sno: index + 1,
   department: att.employeeId.department.dep_name,
-  name: att.employeeId.employeeid.name ,
+  name: att.employeeId.userId.name ,
   action: (<AttendanceHelper status={att.status} />)
 }));
         setAttendance(data);
