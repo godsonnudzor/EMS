@@ -7,10 +7,13 @@ export const columns = [
         selector : (row) => row.sno,
         width: '90px',
         sortable:true
-
     },
-   
-     {
+    {
+        name : "Emp ID",
+        selector : (row) => row.employeeId,
+        width: '165px',
+    },
+    {
         name : "Name",
         selector : (row) => row.name,
         width: '165px',

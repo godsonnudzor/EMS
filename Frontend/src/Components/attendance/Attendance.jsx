@@ -48,10 +48,11 @@ const Attendance = () => {
 
   const handleFilter = (e) => {
     const records = attendance.filter((emp) => (
-      emp.employeeId.employeeId.name.toLowerCase().includes(e.target.value.toLowerCase())
+      emp.employeeId.toLowerCase().
+      includes(e.target.value.toLowerCase())
     ))
     setFilteredAttendance(records)
-  };
+  }; 
   if (!filteredAttendance) {
     return <div>Loading...</div>; 
   }
@@ -60,13 +61,15 @@ const Attendance = () => {
       <div className='text-center '>
         <h3 className='text-2xl font-bold'>Manage Attendance</h3>
       </div>
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center mt-4'>
         <input type="text" 
-        placeholder='Search by Emp Name' 
+        placeholder='Search by Emp ID' 
         className='px-4 py-0.5 border'
         onChange={handleFilter}
          />
-         <p>Mark Employees for {new Date().toLocaleDateString().split("T")[0]}{""}</p>
+         <p className='text-2xl'>Mark Employees for 
+          <span className='font-bold underline'>{new Date().toLocaleDateString().split("T")[0]}{""}</span>
+          </p>
         <Link to='/admin-dashboard/attendance-report' 
         className='px-4 py-1 bg-teal-600 rounded text-white'
         > Attendance Report </Link>
