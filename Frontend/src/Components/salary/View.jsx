@@ -28,6 +28,7 @@ const View = () => {
     };
      useEffect(() => { 
     fetchSalaries();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const filterSalaries = (q) => {
     const filterRecords = salaries.filter((leave) => {
