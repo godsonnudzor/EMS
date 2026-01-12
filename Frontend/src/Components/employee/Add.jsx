@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchDepartments } from "../../Utils/EmployeeHelper";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 const Add = () => {
   const [departments, setDepartments] = React.useState([]);
@@ -35,7 +36,7 @@ const Add = () => {
     // Handle form submission logic here
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/employee/add",
+        `${API_URL}/api/employee/add`,
         formDataObj,
         {
           headers: {
@@ -43,13 +44,17 @@ const Add = () => {
           },
         }
       );
+      console.log(response.data);
       if (response.data.success) {
         navigate("/admin-dashboard/employees");
       }
     } catch (error) {
       console.log(error);
-      if (error.response && !error.response.data.success) {
-        alert(error.response.data.error);
+      if (error.response) {
+        const errorMessage = error.response.data?.error || error.response.data?.message || 'An error occurred';
+        alert(errorMessage);
+      } else {
+        alert('Network error or server not reachable');
       }
     }
   };
